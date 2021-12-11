@@ -1,11 +1,16 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
+import questionRouter from './routes/questionsRouter';
+import serverErrorMiddleware from './middlewares/serverErrorMiddleware';
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/health', (req, res) => {
+app.use(serverErrorMiddleware);
+app.use('/questions', questionRouter);
+
+app.get('/health', (req:Request, res:Response) => {
     res.sendStatus(200);
 });
 
