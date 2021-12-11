@@ -8,6 +8,12 @@ const questionValidator = Joi.object({
     tags: Joi.string().required(),
 });
 
+const usersValidation = Joi.object({
+    name: Joi.string().required(),
+    class: Joi.string().required(),
+});
+
 export {
     questionValidator,
+    usersValidation,
 };
