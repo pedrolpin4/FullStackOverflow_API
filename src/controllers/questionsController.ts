@@ -4,7 +4,6 @@ import * as questionsServices from '../services/quentionsServices';
 import * as questionsRepositories from '../repositories/questionsRepositories';
 import { questionValidator } from '../validations/joiValidations';
 
-/* eslint-disable import/prefer-default-export */
 const postQuestion = async (req:Request, res:Response, next:NextFunction) => {
     const question:QuestionReq = req.body;
     try {
@@ -15,9 +14,18 @@ const postQuestion = async (req:Request, res:Response, next:NextFunction) => {
                 .send(`Your question must follow the pattern {student, class, tags, question}, so ${isValid.details[0].message}`);
         }
         const dbQuestion:number = await questionsRepositories.insertQuestion(question);
-        const dbTags = await questionsServices.handleQuestionsTags(question.tags);
-        console.log(dbTags);
+        await questionsServices.handleQuestionsTags(question.tags);
         return res.status(201).send(dbQuestion);
+    } catch (error) {
+        return next(error);
+    }
+};
+
+const getQuestions = async (req: Request, res:Response, next:NextFunction) => {
+    try {
+        const questions = await questionsRepositories.selectAllNotAnsweredQuestions();
+        if (questions.length) return res.send(questions);
+        return res.status(204).send("All messages've been answered");
     } catch (error) {
         return next(error);
     }
@@ -25,4 +33,5 @@ const postQuestion = async (req:Request, res:Response, next:NextFunction) => {
 
 export {
     postQuestion,
+    getQuestions,
 };

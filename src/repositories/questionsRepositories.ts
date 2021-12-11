@@ -1,5 +1,5 @@
 import connection from '../database';
-import { QuestionReq, Tags } from '../interfaces/questionInterfaces';
+import { DbQuestion, QuestionReq, Tags } from '../interfaces/questionInterfaces';
 
 const insertQuestion = async (question:QuestionReq) => {
     const result = await connection.query(
@@ -19,7 +19,14 @@ const selectTags = async (tag:string):Promise<Tags> => {
     return result.rows[0];
 };
 
+const selectAllNotAnsweredQuestions = async ():Promise<DbQuestion[]> => {
+    const result = await connection.query(`SELECT id, question, student, class, submit_at as "submitAt" 
+        FROM questions WHERE answered = 'f' `);
+    return result.rows;
+};
+
 export {
     insertQuestion,
     selectTags,
+    selectAllNotAnsweredQuestions,
 };
