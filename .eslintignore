@@ -1,1 +1,3 @@
+*.test.ts
 *.test.js
+server.ts
