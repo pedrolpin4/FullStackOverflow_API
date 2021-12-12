@@ -44,8 +44,28 @@ const getQuestionById = async (req: Request, res:Response, next:NextFunction) =>
     }
 };
 
+const postAnswerByQuestionId = async (req:Request, res:Response, next:NextFunction) => {
+    try {
+        const { id } = req.params;
+        const { answer } = req.body;
+        if (!Number(id)) throw new ValidationError('The :id param must be a number');
+        const user = await questionsServices.verifyToken(req);
+        const question = await questionsServices.verifyAnsweredQuestion(Number(id));
+        await questionsRepositories.insertAnswer(answer, user.id, question.id);
+        return res.sendStatus(201);
+    } catch (error) {
+        if (error.name === 'ValidationError') return res.status(400).send(error.message);
+        if (error.name === 'Unauthorized') return res.status(401).send(error.message);
+        if (error.name === 'NotFound') return res.status(404).send(error.message);
+        if (error.name === 'ConflictError') return res.status(409).send(error.message);
+
+        return next(error);
+    }
+};
+
 export {
     postQuestion,
     getQuestions,
     getQuestionById,
+    postAnswerByQuestionId,
 };

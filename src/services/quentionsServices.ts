@@ -1,4 +1,8 @@
+import { Request } from 'express';
+import ConflictError from '../errors/ConflictError';
 import NotFound from '../errors/NotFound';
+import Unauthorized from '../errors/Unauthorized';
+import ValidationError from '../errors/ValidationError';
 import * as questionsRepository from '../repositories/questionsRepositories';
 
 const handleQuestionsTags = async (tag:string) => {
@@ -12,7 +16,30 @@ const handleQuestionAndAnswer = async (id:number) => {
     return result;
 };
 
+const verifyToken = async (req: Request) => {
+    const { authorization } = req.headers;
+    const token = authorization?.replace('Bearer ', '');
+    if (!token) throw new ValidationError('You need to be logged in to answer a question');
+
+    const user = await questionsRepository.selectUserByToken(token);
+
+    if (!user) throw new Unauthorized('It looks like this token is not valid');
+
+    return user;
+};
+
+const verifyAnsweredQuestion = async (id: number) => {
+    const question = await questionsRepository.selectQuestionById(id);
+
+    if (!question) throw new NotFound('This id does not belong to any question');
+    if (question.answered) throw new ConflictError('This question has already been answered');
+
+    return question;
+};
+
 export {
     handleQuestionsTags,
     handleQuestionAndAnswer,
+    verifyToken,
+    verifyAnsweredQuestion,
 };

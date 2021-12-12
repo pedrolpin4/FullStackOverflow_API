@@ -3,6 +3,7 @@ import {
     DbQuestion, DbQuestionAnswered,
     QuestionReq, Tags,
 } from '../interfaces/questionInterfaces';
+import { DbUser } from '../interfaces/userInterfaces';
 
 const insertQuestion = async (question:QuestionReq, tagId:number) => {
     const result = await connection.query(
@@ -19,14 +20,14 @@ const insertTags = async (tag:string):Promise<Tags> => {
 };
 
 const selectQuestionById = async (id:number):Promise<DbQuestionAnswered> => {
-    let result = await connection.query(`SELECT questions.id, questions.question, questions.student, questions.class, 
-        questions.submit_at as "submitAt", tags.name FROM questions 
+    let result = await connection.query(`SELECT questions.question, questions.student, questions.class, questions.answered,
+        questions.submit_at as "submitAt", tags.name as tags FROM questions 
         JOIN tags ON questions.tag_id = tags.id WHERE questions.id = $1`, [id]);
 
     if (result.rows[0].answered) {
-        result = await connection.query(`SELECT questions.id, questions.question, questions.student, questions.class, questions.submit_at as "submitAt"
-        answers.answered_at as "answeredAt", answers.answered_by as "answeredBy", answers.answer, tags.name FROM questions 
-        JOIN answers ON questions.id = answers.question_id JOIN tags ON questions.tag_id = tags.id
+        result = await connection.query(`SELECT questions.question, questions.student, questions.class, questions.submit_at as "submitAt",
+        answers.answered_at as "answeredAt", students.name as "answeredBy", answers.answer, tags.name as tags FROM questions 
+        JOIN answers ON questions.id = answers.question_id JOIN tags ON questions.tag_id = tags.id JOIN students ON answers.answered_by = students.id
         WHERE questions.id = $1`, [id]);
     }
     return result.rows[0];
@@ -38,9 +39,23 @@ const selectAllNotAnsweredQuestions = async ():Promise<DbQuestion[]> => {
     return result.rows;
 };
 
+const selectUserByToken = async (token:string):Promise<DbUser> => {
+    const result = await connection.query('SELECT * FROM students WHERE token = $1', [token]);
+    return result.rows[0];
+};
+
+const insertAnswer = async (answer:string, userId:number, questionId:number) => {
+    await connection.query(
+        'INSERT INTO answers (answer, answered_by, question_id) VALUES ($1, $2, $3)',
+        [answer, userId, questionId],
+    );
+};
+
 export {
     insertQuestion,
     insertTags,
     selectAllNotAnsweredQuestions,
     selectQuestionById,
+    selectUserByToken,
+    insertAnswer,
 };
