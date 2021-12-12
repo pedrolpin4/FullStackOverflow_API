@@ -1,9 +1,9 @@
 import NotFound from '../errors/NotFound';
 import * as questionsRepository from '../repositories/questionsRepositories';
 
-const handleQuestionsTags = async (tags:string) => {
-    const tagsArray = tags.split(', ');
-    return tagsArray;
+const handleQuestionsTags = async (tag:string) => {
+    const tags = await questionsRepository.insertTags(tag);
+    return tags.id;
 };
 
 const handleQuestionAndAnswer = async (id:number) => {

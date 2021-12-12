@@ -12,8 +12,8 @@ const postQuestion = async (req:Request, res:Response, next:NextFunction) => {
         if (isValid) {
             throw new ValidationError(`Your question must follow the pattern {student, class, tags, question}, so ${isValid.details[0].message}`);
         }
-        const dbQuestion:number = await questionsRepositories.insertQuestion(question);
-        await questionsServices.handleQuestionsTags(question.tags);
+        const tagId = await questionsServices.handleQuestionsTags(question.tags);
+        const dbQuestion:number = await questionsRepositories.insertQuestion(question, tagId);
         return res.status(201).send(dbQuestion);
     } catch (error) {
         if (error.name === 'ValidationError') return res.status(400).send(error.message);
