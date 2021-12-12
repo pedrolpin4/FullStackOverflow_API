@@ -46,6 +46,10 @@ const selectUserByToken = async (token:string):Promise<DbUser> => {
 
 const insertAnswer = async (answer:string, userId:number, questionId:number) => {
     await connection.query(
+        "UPDATE questions SET answered = 't' WHERE id = $1",
+        [questionId],
+    );
+    await connection.query(
         'INSERT INTO answers (answer, answered_by, question_id) VALUES ($1, $2, $3)',
         [answer, userId, questionId],
     );

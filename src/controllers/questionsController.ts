@@ -50,8 +50,8 @@ const postAnswerByQuestionId = async (req:Request, res:Response, next:NextFuncti
         const { answer } = req.body;
         if (!Number(id)) throw new ValidationError('The :id param must be a number');
         const user = await questionsServices.verifyToken(req);
-        const question = await questionsServices.verifyAnsweredQuestion(Number(id));
-        await questionsRepositories.insertAnswer(answer, user.id, question.id);
+        await questionsServices.verifyAnsweredQuestion(Number(id));
+        await questionsRepositories.insertAnswer(answer, user.id, Number(id));
         return res.sendStatus(201);
     } catch (error) {
         if (error.name === 'ValidationError') return res.status(400).send(error.message);
