@@ -25,10 +25,10 @@ const selectQuestionById = async (id:number):Promise<DbQuestionAnswered> => {
         JOIN tags ON questions.tag_id = tags.id WHERE questions.id = $1`, [id]);
 
     if (result.rows[0].answered) {
-        result = await connection.query(`SELECT questions.question, questions.student, questions.class, questions.submit_at as "submitAt",
-        answers.answered_at as "answeredAt", students.name as "answeredBy", answers.answer, tags.name as tags FROM questions 
-        JOIN answers ON questions.id = answers.question_id JOIN tags ON questions.tag_id = tags.id JOIN students ON answers.answered_by = students.id
-        WHERE questions.id = $1`, [id]);
+        result = await connection.query(`SELECT questions.question, questions.student, questions.class, tags.name as tags, 
+            questions.answered, questions.submit_at as "submitAt", answers.answered_at as "answeredAt", students.name as "answeredBy", answers.answer
+            FROM questions JOIN answers ON questions.id = answers.question_id JOIN tags ON questions.tag_id = tags.id 
+            JOIN students ON answers.answered_by = students.id WHERE questions.id = $1`, [id]);
     }
     return result.rows[0];
 };
@@ -45,6 +45,10 @@ const selectUserByToken = async (token:string):Promise<DbUser> => {
 };
 
 const insertAnswer = async (answer:string, userId:number, questionId:number) => {
+    await connection.query(
+        "UPDATE questions SET answered = 't' WHERE id = $1",
+        [questionId],
+    );
     await connection.query(
         'INSERT INTO answers (answer, answered_by, question_id) VALUES ($1, $2, $3)',
         [answer, userId, questionId],
