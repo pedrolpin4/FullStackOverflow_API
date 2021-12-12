@@ -5,5 +5,6 @@ const router = Router();
 
 router.post('', questionsController.postQuestion);
 router.get('', questionsController.getQuestions);
+router.get('/:id', questionsController.getQuestionById);
 
 export default router;

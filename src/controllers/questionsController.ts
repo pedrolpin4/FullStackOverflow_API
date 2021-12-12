@@ -31,7 +31,21 @@ const getQuestions = async (req: Request, res:Response, next:NextFunction) => {
     }
 };
 
+const getQuestionById = async (req: Request, res:Response, next:NextFunction) => {
+    try {
+        const { id } = req.params;
+        if (!Number(id)) throw new ValidationError('The :id param must be a number');
+        const questionObject = await questionsServices.handleQuestionAndAnswer(Number(id));
+        return res.send(questionObject);
+    } catch (error) {
+        if (error.name === 'ValidationError') return res.status(400).send(error.message);
+        if (error.name === 'NotFound') return res.status(404).send(error.message);
+        return next(error);
+    }
+};
+
 export {
     postQuestion,
     getQuestions,
+    getQuestionById,
 };
