@@ -17,7 +17,7 @@ A API possui as seguintes rotas:
 <details>
     <summary><strong>POST</strong>  /questions</summary>
     
-* Adiciona uma nova rpergunta
+* Adds a new question
     
     ```json
       {
