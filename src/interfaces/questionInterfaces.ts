@@ -8,18 +8,16 @@ export interface QuestionReq {
 export interface DbQuestion extends QuestionReq {
     id: number;
     answered: boolean;
-    answer_id: null;
-    submit_at: Date;
+    submitAt: string;
     score?: number;
 }
 
 export interface DbQuestionAnswered extends QuestionReq {
     id: number;
     answered: boolean;
-    answer_id: any;
-    submit_at: Date;
-    answer_by?: number;
-    answer_at?: Date;
+    submitAt: string;
+    answerBy?: number;
+    answeredAt?: string;
     answer?: string;
     score?: number;
 }

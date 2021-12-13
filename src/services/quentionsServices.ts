@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { Request } from 'express';
 import ConflictError from '../errors/ConflictError';
 import NotFound from '../errors/NotFound';
@@ -13,6 +14,8 @@ const handleQuestionsTags = async (tag:string) => {
 const handleQuestionAndAnswer = async (id:number) => {
     const result = await questionsRepository.selectQuestionById(id);
     if (!result) throw new NotFound('This id does not belong to any question');
+    result.submitAt = dayjs(result.submitAt).format('YYYY-MM-DD hh:mm');
+    if (result.answered) result.answeredAt = dayjs(result.answeredAt).format('YYYY-MM-DD hh:mm');
     return result;
 };
 
