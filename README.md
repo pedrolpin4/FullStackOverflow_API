@@ -6,7 +6,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 
-## Descrição
+## About
 
 Já ficou com alguma dúvida ou curioso sobre algum tipo de assunto específico? Foi para isso que construímos esta API.
 
@@ -21,14 +21,14 @@ A API possui as seguintes rotas:
     
     ```json
       {
-	      "question": "Uki ta contecendo?",
-	      "student": "Zoru",
+	      "question": "What the hell is happening?",
+	      "student": "Bob",
 	      "class": "T3",
-	      "tags": "typescript, vida, javascript, java?"
+	      "tags": "typescript, life, javascript"
       }
     ```
     
-   O retorno deve ser um id da pergunta cadastrada
+   It must return the id of the question you've registered
 
 ```json
       {
@@ -41,13 +41,13 @@ A API possui as seguintes rotas:
 <details>
     <summary><strong>GET</strong>  /questions/:id</summary>
     
-Existem duas respostas possíveis, pergunta não respondida.
+There are 2 possibilities, an answered question or a question that has not been answered yet
 ```json
 {
-	"question": "Uki ta contecendo?",
-	"student": "Zoru",
+	"question": "What the hell is going on?",
+	"student": "Bob",
 	"class": "T3",
-	"tags": "typescript, vida, javascript, java?"
+	"tags": "typescript, vida, javascript"
 	"answered": false,
 	"submitAt": "2021-01-01 10:12"
 }
@@ -57,15 +57,15 @@ E pergunta respondida.
 
 ```json
 {
-	"question": "Uki ta contecendo?",
+	"question": "What the hell is going on?",
 	"student": "Zoru",
 	"class": "T3",
-	"tags": "typescript, vida, javascript, java?"
+	"tags": "typescript, vida, javascript"
 	"answered": true,
 	"submitAt": "2021-01-01 10:12"
 	"answeredAt": "2021-01-01 10:30"
 	"answeredBy": "Vegeta",
-	"answer": "É mais de 8 miiiil!" 
+	"answer": "More than 8 thousand!!" 
 }
 ```
 </details> 
@@ -73,11 +73,11 @@ E pergunta respondida.
 <details>
     <summary><strong>POST</strong> /questions/:id</summary>
     
-Essa rota é usada para responder perguntas com base no id da pergunta e ela deve capturar um **Bearer token** que será usado para identificar quem respondeu a pergunta.
+This route is used to answer the question  e ela deve capturar um based on th question's id **Bearer token** that'll be used to identify the student who answered
 
 ```json
 {
-	"answer": "É mais de 8 miiiil!" 
+	"answer": "More than 8 thousand" 
 }
 ```
 </details>
@@ -85,14 +85,14 @@ Essa rota é usada para responder perguntas com base no id da pergunta e ela dev
 <details>
     <summary><strong>GET</strong> /questions</summary>
 
-Essa rota deve retornar apenas as perguntas não respondidas
+This route must return only the unanswered questions
 
 ```json
 [
 	{
 		"id": 123243,
-		"question": "Uki ta contecendo?", 
-		"student": "Zoru", 
+		"question": "What the hell is going on?", 
+		"student": "Bob", 
 		"class": "T3",
 		"submitAt": "2021-01-01 10:12"
 	}
@@ -104,11 +104,11 @@ Essa rota deve retornar apenas as perguntas não respondidas
 <details>
     <summary><strong>POST</strong> /users</summary>
     
-Essa rota é usada para cadastrar uma pessoa e deve retornar um token que será usado para responder perguntas
+This route is used to register an user
 
 ```json
 {
-	"name": "Vegata",
+	"name": "Vegeta",
 	"class": "T3" 
 }
 ```
