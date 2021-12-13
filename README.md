@@ -1,8 +1,9 @@
 # FullStackOverflow-API
 
-<p align="center" >
-	<img width="534" alt="Screen Shot 2021-12-13 at 16 43 58" src="https://user-images.githubusercontent.com/87671165/145877878-be55f3ec-3078-4120-b767-491bfd130e09.png">
-</p>
+	<p align="center" >
+		<img width="534" alt="Screen Shot 2021-12-13 at 16 43 58" src="https://user-images.githubusercontent.com/87671165/145877878-be55f3ec-3078-4120-b767-491bfd130e09.png">
+	</p>
+
 ## About
 
 Have you ever been stuck with a bug that feels impossible to be solved? That's why we've created this API, to make you life easier in terms of debugging your program. In this API you can ask and answer questions to make our community more united.
