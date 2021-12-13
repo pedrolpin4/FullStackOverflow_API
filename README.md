@@ -159,7 +159,7 @@ This route should return the top 10 students ordered by the sum of the points fr
 ## Database Architecture
 
 <p align="center" >
-	<img width="998" alt="Screen Shot 2021-12-13 at 16 59 48" src="https://user-images.githubusercontent.com/87671165/145880187-994e37e5-4a2b-44d4-a600-3ad70042ec16.png">
+	<img width="534" alt="Screen Shot 2021-12-13 at 16 59 48" src="https://user-images.githubusercontent.com/87671165/145880187-994e37e5-4a2b-44d4-a600-3ad70042ec16.png">
 </p>
 
 ## How to run?
