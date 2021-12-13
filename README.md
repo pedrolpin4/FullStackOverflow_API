@@ -1,7 +1,8 @@
 # FullStackOverflow-API
 
-<img width="534" alt="Screen Shot 2021-12-13 at 16 43 58" src="https://user-images.githubusercontent.com/87671165/145877878-be55f3ec-3078-4120-b767-491bfd130e09.png">
-
+<p align="center" >
+	<img width="534" alt="Screen Shot 2021-12-13 at 16 43 58" src="https://user-images.githubusercontent.com/87671165/145877878-be55f3ec-3078-4120-b767-491bfd130e09.png">
+</p>
 ## About
 
 Have you ever been stuck with a bug that feels impossible to be solved? That's why we've created this API, to make you life easier in terms of debugging your program. In this API you can ask and answer questions to make our community more united.
@@ -131,19 +132,25 @@ This route is used to downvote a question.
 <details>
     <summary><strong>GET</strong> /ranking</summary>
     
-This route is used to register an user
+This route should return the top 10 students ordered by the sum of the points from each question they've answered
+
+**Obs**.: The parameter for the sorting is the quantity of up and downvotes.
+
+**Obs**.: Sorts by `points`
 
 ```json
-{
-	"name": "Vegeta",
-	"class": "T3" 
-}
-```
-
-```json
-{
-	"token": "1234-5678"
-}
+[
+	{
+		"name": "Vovo Juju",
+		"answers": 8001,
+		"points": 8001
+	},
+	{
+		"name": "Vegeta",
+		"answers": 12,
+		"points": 12
+	}
+]
 ```
 </details>
 
@@ -173,3 +180,10 @@ npm start:dev
 ![ExpressJS](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+
+## Get in touch!
+[<img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" />](https://www.linkedin.com/in/pina-pedrolucas)
+[![Gmail Badge](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:pedrolucaspina22@gmail.com)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/pedrolpin4/)
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/pedrolpin4)
+[![WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://api.whatsapp.com/send?phone=5521967431453&text=Olá,%20meu%20amigo!)
