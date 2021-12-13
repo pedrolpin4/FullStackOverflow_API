@@ -37,9 +37,18 @@ const verifyAnsweredQuestion = async (id: number) => {
     return question;
 };
 
+const handleVotes = async (id: number, type: string) => {
+    const score = await questionsRepository.selectScoreByQuestionId(id);
+
+    if (!score) throw new NotFound('This id does not belong to any question');
+
+    await questionsRepository.updateQuestionsScore(id, type === 'up' ? score + 1 : score - 1);
+};
+
 export {
     handleQuestionsTags,
     handleQuestionAndAnswer,
     verifyToken,
     verifyAnsweredQuestion,
+    handleVotes,
 };

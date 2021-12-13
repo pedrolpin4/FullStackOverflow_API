@@ -63,9 +63,33 @@ const postAnswerByQuestionId = async (req:Request, res:Response, next:NextFuncti
     }
 };
 
+const voteQuestion = async (req:Request, res:Response, next:NextFunction, type: string) => {
+    try {
+        const { id } = req.params;
+        if (!Number(id)) throw new ValidationError('The :id param must be a number');
+        await questionsServices.handleVotes(Number(id), type);
+        return res.sendStatus(200);
+    } catch (error) {
+        if (error.name === 'ValidationError') return res.status(400).send(error.message);
+        if (error.name === 'NotFound') return res.status(404).send(error.message);
+
+        return next(error);
+    }
+};
+
+const downVote = async (req:Request, res:Response, next:NextFunction) => {
+    await voteQuestion(req, res, next, 'down');
+};
+
+const upVote = async (req:Request, res:Response, next:NextFunction) => {
+    await voteQuestion(req, res, next, 'up');
+};
+
 export {
     postQuestion,
     getQuestions,
     getQuestionById,
     postAnswerByQuestionId,
+    downVote,
+    upVote,
 };
