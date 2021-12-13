@@ -61,7 +61,6 @@ const selectScoreByQuestionId = async (id: number): Promise<number> => {
 };
 
 const updateQuestionsScore = async (questionId: number, newScore: number) => {
-    console.log(newScore);
     await connection.query('UPDATE questions SET score = $1 WHERE id = $2', [newScore, questionId]);
 };
 

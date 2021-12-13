@@ -70,6 +70,9 @@ const voteQuestion = async (req:Request, res:Response, next:NextFunction, type: 
         await questionsServices.handleVotes(Number(id), type);
         return res.sendStatus(200);
     } catch (error) {
+        if (error.name === 'ValidationError') return res.status(400).send(error.message);
+        if (error.name === 'NotFound') return res.status(404).send(error.message);
+
         return next(error);
     }
 };
