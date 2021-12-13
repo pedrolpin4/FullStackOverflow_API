@@ -10,6 +10,7 @@ export interface DbQuestion extends QuestionReq {
     answered: boolean;
     answer_id: null;
     submit_at: Date;
+    score?: number;
 }
 
 export interface DbQuestionAnswered extends QuestionReq {
@@ -20,6 +21,7 @@ export interface DbQuestionAnswered extends QuestionReq {
     answer_by?: number;
     answer_at?: Date;
     answer?: string;
+    score?: number;
 }
 
 export interface Tags {

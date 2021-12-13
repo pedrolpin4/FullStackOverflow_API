@@ -25,7 +25,7 @@ const selectQuestionById = async (id:number):Promise<DbQuestionAnswered> => {
         JOIN tags ON questions.tag_id = tags.id WHERE questions.id = $1`, [id]);
 
     if (result.rows[0].answered) {
-        result = await connection.query(`SELECT questions.question, questions.student, questions.class, tags.name as tags, 
+        result = await connection.query(`SELECT questions.question, questions.score, questions.student, questions.class, tags.name as tags, 
             questions.answered, questions.submit_at as "submitAt", answers.answered_at as "answeredAt", students.name as "answeredBy", answers.answer
             FROM questions JOIN answers ON questions.id = answers.question_id JOIN tags ON questions.tag_id = tags.id 
             JOIN students ON answers.answered_by = students.id WHERE questions.id = $1`, [id]);
@@ -55,6 +55,16 @@ const insertAnswer = async (answer:string, userId:number, questionId:number) => 
     );
 };
 
+const selectScoreByQuestionId = async (id: number): Promise<number> => {
+    const result = await connection.query('SELECT score FROM questions WHERE id = $1', [id]);
+    return result.rows[0].score;
+};
+
+const updateQuestionsScore = async (questionId: number, newScore: number) => {
+    console.log(newScore);
+    await connection.query('UPDATE questions SET score = $1 WHERE id = $2', [newScore, questionId]);
+};
+
 export {
     insertQuestion,
     insertTags,
@@ -62,4 +72,6 @@ export {
     selectQuestionById,
     selectUserByToken,
     insertAnswer,
+    updateQuestionsScore,
+    selectScoreByQuestionId,
 };
