@@ -174,7 +174,7 @@ npm i
 npm start:dev
 ```
 
-## Technologies I used?
+## Technologies I used
 
 ![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
