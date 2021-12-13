@@ -5,7 +5,7 @@ const selectRanking = async (): Promise<Ranking[]> => {
     const result = await connection.query(`SELECT students.name, COUNT(*) as answers, SUM(questions.score) as points FROM questions 
         JOIN answers ON questions.id = answers.question_id 
         JOIN students ON students.id = answers.answered_by GROUP BY students.name
-        ORDER BY points DESC;
+        ORDER BY points DESC LIMIT 10;
     `);
 
     return result.rows;
