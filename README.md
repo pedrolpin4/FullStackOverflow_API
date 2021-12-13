@@ -8,11 +8,9 @@
 
 ## About
 
-Já ficou com alguma dúvida ou curioso sobre algum tipo de assunto específico? Foi para isso que construímos esta API.
+Have you ever been stuck with a bug that feels impossible to be solved? That's why we've created this API, to make you life easier in terms of debugging your program. In this API you can ask and answer questions to make our community more united.
 
-FullStackOverflow é uma API as pessoas podem publicar e responder perguntas livremente.
-
-A API possui as seguintes rotas:
+This API contains the following routes:
 
 <details>
     <summary><strong>POST</strong>  /questions</summary>
@@ -120,9 +118,42 @@ This route is used to register an user
 ```
 </details>
 
+<details>
+    <summary><strong>PUT</strong> /questions/:id/upvote</summary>
+    
+This route is used to upvote a question. Each question will be posted with a initial score of 1
+
+</details>
+
+<details> 
+    <summary><strong>PUT</strong> /questions/:id/downvote</summary>
+    
+This route is used to downvote a question.
+
+</details>
+
+<details>
+    <summary><strong>GET</strong> /ranking</summary>
+    
+This route is used to register an user
+
+```json
+{
+	"name": "Vegeta",
+	"class": "T3" 
+}
+```
+
+```json
+{
+	"token": "1234-5678"
+}
+```
+</details>
+
 ## How to run?
 
-You can use this url to make your requisitions: https://sing-me-a-song-backend.herokuapp.com, or run it locally following the steps bellow:
+Run it locally following the steps bellow:
 
 1. Clone this repository
 2. Install dependencies
