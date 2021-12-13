@@ -1,6 +1,6 @@
 # FullStackOverflow-API
 
-<img width="1067" alt="Screen Shot 2021-12-13 at 16 43 58" src="https://user-images.githubusercontent.com/87671165/145877878-be55f3ec-3078-4120-b767-491bfd130e09.png">
+<img width="534" alt="Screen Shot 2021-12-13 at 16 43 58" src="https://user-images.githubusercontent.com/87671165/145877878-be55f3ec-3078-4120-b767-491bfd130e09.png">
 
 ## About
 
