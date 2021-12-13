@@ -120,20 +120,21 @@ This route is used to register an user
 ```
 </details>
 
-## Como rodar o projeto?
+## How to run?
 
-Rode localmente seguindo os passos abaixo:
+You can use this url to make your requisitions: https://sing-me-a-song-backend.herokuapp.com, or run it locally following the steps bellow:
 
-1. Clone este repositorio
-2. Instale as dependencias
+1. Clone this repository
+2. Install dependencies
 ```bash
 npm i
 ```
-3. Abra um arquivo "database_backup.sql", copie e cole o script para criar seu banco de dados no postgres;
+3. Open the repository's folder;
+4. Open the file "database_backup.sql", then copy and paste the script on some database you'll create on your postgres terminal;
 
-4. Crie um arquivo '.env.dev' seguindo o arquivo '.env.example';
+5. create an .env.dev file following the .env.example template using the credentials of the database you've created above;
 
-5.Rode o backend 
+6. Run the Back End with
 ```bash
-npm run start:dev
+npm start:dev
 ```
