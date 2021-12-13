@@ -20,8 +20,8 @@ const insertTags = async (tag:string):Promise<Tags> => {
 };
 
 const selectQuestionById = async (id:number):Promise<DbQuestionAnswered> => {
-    let result = await connection.query(`SELECT questions.question, questions.student, questions.class, questions.answered,
-        questions.submit_at as "submitAt", tags.name as tags FROM questions 
+    let result = await connection.query(`SELECT questions.question, questions.student, questions.class, tags.name as tags, 
+        questions.answered, questions.submit_at as "submitAt" FROM questions 
         JOIN tags ON questions.tag_id = tags.id WHERE questions.id = $1`, [id]);
 
     if (result.rows[0].answered) {

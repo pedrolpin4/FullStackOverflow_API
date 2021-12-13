@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import dayjs from 'dayjs';
 import { QuestionReq } from '../interfaces/questionInterfaces';
 import * as questionsServices from '../services/quentionsServices';
 import * as questionsRepositories from '../repositories/questionsRepositories';
@@ -24,8 +25,12 @@ const postQuestion = async (req:Request, res:Response, next:NextFunction) => {
 const getQuestions = async (req: Request, res:Response, next:NextFunction) => {
     try {
         const questions = await questionsRepositories.selectAllNotAnsweredQuestions();
-        if (questions.length) return res.send(questions);
-        return res.status(204).send("All messages've been answered");
+        if (!questions.length) return res.status(204).send("All messages've been answered");
+        const mappedQuestion = questions.map((question) => ({
+            ...question,
+            submitAt: dayjs(question.submitAt).format('YYYY-MM-DD hh:mm'),
+        }));
+        return res.send(mappedQuestion);
     } catch (error) {
         return next(error);
     }
